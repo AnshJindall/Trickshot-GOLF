@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Terrain
+  - Props
+  - Ball
+  - Effects
+  - UI
   - 
   - 
   - 
@@ -41,3 +41,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 2256640207
+    locked: 0
+  - name: Pipes
+    uniqueID: 1800962957
+    locked: 0
+  - name: Terrain
+    uniqueID: 3944042725
+    locked: 0
+  - name: Props
+    uniqueID: 2420704571
+    locked: 0
+  - name: Ball
+    uniqueID: 2480783227
+    locked: 0
+  - name: Effects
+    uniqueID: 1149353451
+    locked: 0
+  - name: UI
+    uniqueID: 3141153639
+    locked: 0
+  m_RenderingLayers:
+  - Default
