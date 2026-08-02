@@ -13,8 +13,8 @@ public class BallController : MonoBehaviour
     [SerializeField] private Transform aimArrow;
 
     [Header("Arrow")]
-    [SerializeField] private float minArrowLength = 0.4f;
-    [SerializeField] private float maxArrowLength = 2f;
+    [SerializeField] private float minArrowLength = 0.6f;
+    [SerializeField] private float maxArrowLength = 1.5f;
 
     private Rigidbody2D rb;
     private Camera cam;
@@ -39,21 +39,20 @@ public class BallController : MonoBehaviour
             return;
 
         Vector2 pointerPos = GetPointerPosition();
-
         // Start dragging
         if (!isDragging && PointerPressed())
         {
             Collider2D hit = Physics2D.OverlapPoint(pointerPos);
 
-            if (hit != null && hit.GetComponentInParent<BallController>() != null)
-            {
-                Debug.Log("Ball Clicked!");
 
-                isDragging = true;
-                dragStart = transform.position;
+        if (hit != null && hit.GetComponentInParent<BallController>() != null)
+        {
 
-                aimArrow.gameObject.SetActive(true);
-            }
+            isDragging = true;
+            dragStart = transform.position;
+
+            aimArrow.gameObject.SetActive(true);
+        }
         }
 
         // While dragging
@@ -74,17 +73,19 @@ public class BallController : MonoBehaviour
     private void UpdateArrow()
     {
         float angle = Mathf.Atan2(dragDirection.y, dragDirection.x) * Mathf.Rad2Deg;
-
         aimArrow.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
-        // Move arrow in front of the ball
-        aimArrow.localPosition = dragDirection.normalized * 0.5f;
-
+        // Calculate power (0 to 1)
         float power = dragDirection.magnitude / maxDragDistance;
+        power *= power; // Smooth scaling
 
-        float length = Mathf.Lerp(minArrowLength, maxArrowLength, power);
+        // Move arrow further away as power increases
+        float offset = Mathf.Lerp(0.35f, 0.8f, power);
+        aimArrow.localPosition = dragDirection.normalized * offset;
 
-        aimArrow.localScale = new Vector3(1f, length, 1f);
+        // Uniformly scale arrow
+        float size = Mathf.Lerp(minArrowLength, maxArrowLength, power);
+        aimArrow.localScale = Vector3.one * size;
     }
 
     private void LaunchBall()
@@ -95,6 +96,7 @@ public class BallController : MonoBehaviour
         aimArrow.gameObject.SetActive(false);
 
         rb.linearVelocity = dragDirection * launchForce;
+        AudioManager.Instance.PlayLaunch();
     }
 
     private void FixedUpdate()
@@ -111,19 +113,19 @@ public class BallController : MonoBehaviour
 
     private Vector2 GetPointerPosition()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
+    #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
         return cam.ScreenToWorldPoint(Input.mousePosition);
-#else
+    #else
         if (Input.touchCount > 0)
             return cam.ScreenToWorldPoint(Input.GetTouch(0).position);
 
         return Vector2.zero;
-#endif
+    #endif
     }
 
     private bool PointerPressed()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
         return Input.GetMouseButtonDown(0);
 #else
         return Input.touchCount > 0 &&
@@ -133,7 +135,7 @@ public class BallController : MonoBehaviour
 
     private bool PointerReleased()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
         return Input.GetMouseButtonUp(0);
 #else
         return Input.touchCount > 0 &&

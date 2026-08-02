@@ -1,0 +1,12 @@
+# ninja log v5
+141	1764	8073755074302055	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	24f9c41474419063
+1768	3243	8073755088681818	C:/Users/User/Trickshot GOLF/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/335k366k/obj/arm64-v8a/libswappywrapper.so	3ce8f58b9d060ca4
+56	5080	8073755107269379	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	33e547727cfc0a20
+45	5137	8073755107999331	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	82ab22970f420ca8
+17	5176	8073755108357883	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5932f3f30a481ca6
+111	5196	8073755108485605	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	20b8d61b4028f046
+31	5265	8073755109285280	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5fbdc227ede14e30
+89	5535	8073755112022295	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4e6c7cf4867ef944
+72	5640	8073755112872841	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	6514dd1a93197eb0
+1	5833	8073755114925903	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	640f1bbeea44b7d0
+5834	6045	8073755117141959	C:/Users/User/Trickshot GOLF/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/335k366k/obj/arm64-v8a/libgame.so	7b6cd47f60f5a9c9

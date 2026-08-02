@@ -19,34 +19,24 @@ public class HoleTrigger : MonoBehaviour
         if (ball != null)
         {
             levelComplete = true;
-            StartCoroutine(WinSequence(ball));
+            StartCoroutine(WinSequence());
         }
     }
 
-    private IEnumerator WinSequence(BallController ball)
-    {   Debug.Log("Win!");
+    private IEnumerator WinSequence()
+{   // Prevent the hole from triggering again
+    GetComponent<Collider2D>().enabled = false;
 
-        confetti.Play();
+    confetti.Play();
+    
+    AudioManager.Instance.PlayLevelWin();
 
-        yield return new WaitForSeconds(2f);
+    yield return new WaitForSeconds(1.5f);
 
-        LoadNextLevel();
-        Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+    AudioManager.Instance.PlayWhoosh();
 
-        rb.linearVelocity = Vector2.zero;
-        rb.angularVelocity = 0f;
-        rb.simulated = false;
-
-        // Tiny sink
-        ball.transform.position += Vector3.down * 0.08f;
-        yield return new WaitForSeconds(1.5f);
-        // Hide the ball
-        ball.gameObject.SetActive(false);
-
-
-        yield return new WaitForSeconds(1.5f);
-
-    }
+    LoadNextLevel();
+}
 
     private void LoadNextLevel()
     {
@@ -59,7 +49,8 @@ public class HoleTrigger : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game Complete!");
+            AudioManager.Instance.PlayVictory();
+            SceneManager.LoadScene("EndScene");
         }
     }
 }

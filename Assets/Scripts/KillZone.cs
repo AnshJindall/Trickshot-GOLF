@@ -8,6 +8,8 @@ public class KillZone : MonoBehaviour
 
         if (ball != null)
         {
+            GameManager.Instance.LoseLife();
+            AudioManager.Instance.PlayLoseLife();
             ball.Respawn();
         }
     }
